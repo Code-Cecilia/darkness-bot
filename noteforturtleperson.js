@@ -1,1 +1,0 @@
-// gay and a loser
