@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message) => {
     console.log(message.author.tag, 'used the serverinfo command.')
     let sEmbed = new Discord.RichEmbed()
     .setColor()

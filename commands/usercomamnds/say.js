@@ -1,9 +1,6 @@
-const Discord = require("discord.js")
-
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (message, args) => {
     console.log(message.author.tag, 'used the say command.')
-    if(!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"])) return message.channel.send("You can not use this command!")
-    
+    if(!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"])) return message.channel.send("You can not use this command!") 
     let argsresult;
     let mChannel = message.mentions.channels.first()
 

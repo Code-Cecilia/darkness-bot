@@ -1,4 +1,4 @@
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message) => {
     console.log(message.author.tag, 'used the command creeper')
     const Discord = require("discord.js");
     const embed = new Discord.RichEmbed()
@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args) => {
 
     module.exports.help = {
         name: "creeper",
-        aliases: [],
+        aliases: ["lm"],
         disabled: false,
         ownerOnly: false,
         adminOnly: false,

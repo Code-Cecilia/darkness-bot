@@ -1,15 +1,13 @@
 const randomPuppy = require('random-puppy');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (message) => {
     console.log(message.author.tag, 'used the command dog')
     let reddit = [
         "dog"
     ]
 
     let subreddit = reddit[Math.floor(Math.random() * reddit.length)];
-
     message.channel.startTyping();
-
     randomPuppy(subreddit).then(async url => {
             await message.channel.send({
                 files: [{

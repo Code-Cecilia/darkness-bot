@@ -1,4 +1,4 @@
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
     console.log(message.author.tag, "used the avatar command");
     const Discord = require("discord.js");
     const embed = new Discord.RichEmbed()
@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
 
     module.exports.help = {
         name: "avatar",
-        aliases: ["h"],
+        aliases: ["a"],
         disabled: false,
         ownerOnly: false,
         adminOnly: false,

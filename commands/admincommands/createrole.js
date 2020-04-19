@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 module.exports.run = async (client, message, args) => {
     const name = args[0]
     const color = args[1]

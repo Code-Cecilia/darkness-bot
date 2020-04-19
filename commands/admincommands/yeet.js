@@ -1,10 +1,6 @@
-const Discord = require("discord.js")
-
-
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (message) => {
     console.log(message.author.tag, 'used the command yeet')
-    if(message.author.id != "219410026631135232") return message.channel.send("You're the bot the owner!")
-
+    if(message.author.id != "219410026631135232") return message.channel.send("You're not the bot owner!")
     try {
         await message.channel.send("Roses are red, violets are blue, my process is dead im such a disaster :(")
         process.exit()
@@ -15,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.help = {
     name: "yeet",
-    aliases: [],
+    aliases: ["shutdown"],
     disabled: false,
     ownerOnly: false,
     adminOnly: true,

@@ -1,16 +1,13 @@
 const randomPuppy = require('random-puppy');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (message) => {
     console.log(message.author.tag, 'used the command cat')
     let reddit = [
-        "cat"
-       
+        "cat" 
     ]
 
     let subreddit = reddit[Math.floor(Math.random() * reddit.length)];
-
     message.channel.startTyping();
-
     randomPuppy(subreddit).then(async url => {
             await message.channel.send({
                 files: [{
@@ -19,12 +16,11 @@ module.exports.run = async (bot, message, args) => {
                 }]
             }).then(() => message.channel.stopTyping());
     }).catch(err => console.error(err));
-
 };
 
 module.exports.help = {
     name: "cat",
-    aliases: [],
+    aliases: ["poosi"],
     disabled: false,
     ownerOnly: false,
     adminOnly: false,

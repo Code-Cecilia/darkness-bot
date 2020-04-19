@@ -1,4 +1,4 @@
-exports.run = async (client, message, args) => {
+exports.run = async (message, args) => {
     console.log(message.author.tag, 'used the command eval')
     if (message.author.id !== '219410026631135232') return;
     try {
@@ -7,7 +7,6 @@ exports.run = async (client, message, args) => {
         if (evaled instanceof Promise) evaled = await evaled
         if (typeof evaled !== "string")
             evaled = require("util").inspect(evaled);
-
         message.channel.send(clean(evaled), {
             code: "xl"
         }).catch(console.error);
@@ -25,7 +24,7 @@ const clean = text => {
 
 module.exports.help = {
     name: "eval",
-    aliases: ["evaluate"],
+    aliases: ["evaluate", "e"],
     disabled: true,
     ownerOnly: true,
     adminOnly: false,

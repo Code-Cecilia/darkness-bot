@@ -1,6 +1,6 @@
 const randomPuppy = require('random-puppy');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (message) => {
 console.log(message.author.tag, 'used the meme command.');
     let reddit = [
         "meme",

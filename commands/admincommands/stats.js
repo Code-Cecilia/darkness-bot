@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 
-exports.run = (client, message, bot) => {
+exports.run = (client, message) => {
     console.log(message.author.tag, 'used the command stats')
         const embed = new Discord.RichEmbed();
         embed.setThumbnail("https://cdn.discordapp.com/avatars/504405249419902977/ab8b4e639448f60afb9b59c24c3e2eab.png?size=256")
