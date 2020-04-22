@@ -7,9 +7,12 @@ exports.run = (client, message, args) => {
     if(!client.commands.has(commandName)) {
       return message.reply("That command does not exist");
     }
-    delete require.cache[require.resolve(`./admincommands/${commandName}.js` && `./usercomamnds/${commandName}.js`)];
+    delete require.cache[require.resolve(`${commandName}.js`, { paths: ['./commands/admincommands', './commands/usercomamnds'] })];
     client.commands.delete(commandName);
-    const props = require(`./admincommands/${commandName}.js` && `./usercomamnds/${commandName}.js`);
+    const props = {
+      admin: require(admincommands),
+      user: require(usercomamnds)
+    };
     client.commands.set(commandName, props);
     message.reply(`The command ${commandName} has been reloaded`);
   };

@@ -1,4 +1,4 @@
-module.exports.run = async (message, args) => {
+module.exports.run = async (client, message, args) => {
     console.log(message.author.tag, 'used the say command.')
     if(!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"])) return message.channel.send("You can not use this command!") 
     let argsresult;

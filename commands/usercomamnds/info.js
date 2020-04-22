@@ -1,7 +1,7 @@
-exports.run = (message) => {
+exports.run = (client, message, args) => {
     console.log(message.author.tag, "used the info command");
     const Discord = require("discord.js");
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
   embed.setTitle("__**Bot Dev**__")
   embed.setThumbnail("https://cdn.discordapp.com/avatars/219410026631135232/a_f882c3836fc2a04ed028f1a459973453.gif")
   embed.setColor(0x00AE86)

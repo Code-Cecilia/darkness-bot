@@ -1,7 +1,7 @@
 module.exports.run = async (client, message) => {
     console.log(message.author.tag, 'used the command hon')
     const Discord = require("discord.js");
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         embed.setColor(3447003)
         embed.setTitle('HonHonHon, la baguette! ( ͡° ͜ʖ ͡°)')
         embed.setImage('https://cdn.discordapp.com/attachments/556116494417920002/612042004821442562/baguette.png')

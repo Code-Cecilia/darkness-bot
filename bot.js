@@ -11,7 +11,7 @@ setInterval(() => {
 }, 280000);
 
 
-const {Client, RichEmbed, Collection} = require('discord.js');
+const {Client, MessageEmbed, Collection} = require('discord.js');
 const client = new Client();
 const fs = require("fs");
 const Enmap = require("enmap");

@@ -1,4 +1,4 @@
-module.exports.run = async (message) => {
+module.exports.run = async (client, message, args) => {
     console.log(message.author.tag, 'used the command yeet')
     if(message.author.id != "219410026631135232") return message.channel.send("You're not the bot owner!")
     try {

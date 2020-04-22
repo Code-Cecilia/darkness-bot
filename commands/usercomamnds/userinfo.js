@@ -1,8 +1,8 @@
 const Discord = require("discord.js")
 
-module.exports.run = async (bot, message) => {
+module.exports.run = async (bot, message, client, args) => {
     console.log(message.author.tag, 'used the userinfo command.')
-    let uEmbed = new Discord.RichEmbed()
+    let uEmbed = new Discord.MessageEmbed()
     let member = message.mentions.users.first() || message.author;
     uEmbed.setColor()
     uEmbed.setTitle("User Info")

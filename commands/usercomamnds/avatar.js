@@ -1,7 +1,7 @@
-exports.run = (client, message) => {
+exports.run = (client, message, args) => {
     console.log(message.author.tag, "used the avatar command");
     const Discord = require("discord.js");
-    const embed = new Discord.RichEmbed()
+    const embed = new Discord.MessageEmbed()
         let member = message.mentions.users.first() || message.author;
         embed.setColor(0x333333);
         embed.setTitle(member.username + ' avatar');
