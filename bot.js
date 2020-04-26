@@ -10,16 +10,20 @@ setInterval(() => {
   http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
 }, 280000);
 
-
-const {Client, MessageEmbed, Collection} = require('discord.js');
-const client = new Client();
+const { Client, MessageEmbed, Collection, guild } = require("discord.js");
 const fs = require("fs");
 const Enmap = require("enmap");
-const config = require('./config.json');
-const moment = require('moment');
-const RegExp = require("regexp")
+const config = require("./config.json");
+const moment = require("moment");
+const RegExp = require("regexp");
+const { connect } = require("mongoose");
+const client = new Client({
+  disableEveryone: true,
+  fetchAllMembers: true
+});
 
 client.config = require("./config.json");
+client.mongoose = require("./util/mongoose");
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -27,13 +31,14 @@ fs.readdir("./events/", (err, files) => {
     const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
     client.on(eventName, event.bind(null, client));
+    console.log(`Listener loaded: ${file}`);
   });
 });
 
 client.commands = new Collection();
 client.aliases = new Collection();
 
-client.settings = new Enmap({name: "settings"});
+client.settings = new Enmap({ name: "settings" });
 
 const categories = ["usercomamnds", "admincommands"];
 
@@ -51,35 +56,40 @@ categories.forEach(category => {
 });
 
 const init = async () => {
-
-const evtFiles = await readdir("./events/");
-client.logger.log(`Loading a total of ${evtFiles.length} events.`);
-evtFiles.forEach(file => {
-  const eventName = file.split(".")[0];
-  client.logger.log(`Loading Event: ${eventName}`);
-  const event = require(`./events/${file}`);
-  client.on(eventName, event.bind(null, client));
-});
+  const evtFiles = await readdir("./events/");
+  client.logger.log(`Loading a total of ${evtFiles.length} events.`);
+  evtFiles.forEach(file => {
+    const eventName = file.split(".")[0];
+    client.logger.log(`Loading Event: ${eventName}`);
+    const event = require(`./events/${file}`);
+    client.on(eventName, event.bind(null, client));
+  });
 };
 
+client.mongoose.init(connect);
 
-client.on('message', message => {
-  if (message.content.startsWith(config.PREFIX + 'invite')) {
-    message.channel.send('Invite me using this link: https://discordapp.com/oauth2/authorize?client_id=504405249419902977&scope=bot&permissions=8')
-    }
-  });
+client.on("message", message => {
+  if (message.content.startsWith(config.PREFIX + "invite")) {
+    message.channel.send(
+      "Invite me using this link: https://discordapp.com/oauth2/authorize?client_id=504405249419902977&scope=bot&permissions=8"
+    );
+  }
+});
 
-
-client.on('message', message => {
+client.on("message", message => {
   if (message.author.id == client.user.id) return;
-  if (message.mentions.users.first() 
-  && message.mentions.users.first().id == client.user.id) {
-    message.reply(`Hello! My prefix is \`${config.PREFIX}\`, type \`${config.PREFIX}help\` to see a list of commands.`);
-    }
-  });
+  if (
+    message.mentions.users.first() &&
+    message.mentions.users.first().id == client.user.id
+  ) {
+    message.reply(
+      `Hello! My prefix is \`${config.PREFIX}\`, type \`${config.PREFIX}help\` to see a list of commands.`
+    );
+  }
+});
 
-  process.on('unhandledRejection', error => {
-    console.error('Unhandled promise rejection:', error);
-  });
+process.on("unhandledRejection", error => {
+  console.error("Unhandled promise rejection:", error);
+});
 
- client.login(process.env.TOKEN);   
+client.login(process.env.TOKEN);

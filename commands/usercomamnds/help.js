@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
+
 exports.run = (client, message, args) => helpEmbed(client, message)
+
 function helpEmbed(client, message) {
   const embed = new Discord.MessageEmbed()
   const vCommands = client.commands.filter(c => !c.help.disabled);

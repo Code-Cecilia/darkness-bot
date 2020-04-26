@@ -1,0 +1,9 @@
+Mod-Logs
+Eval with Embed must do today
+Server Settings (with database)
+Change the default status information (on dk!userinfo <@someone>)
+moderation commands (ban, kick, mute and warn)
+economy?
+custom games?
+custom commands (using database)? 
+mention prefix 
