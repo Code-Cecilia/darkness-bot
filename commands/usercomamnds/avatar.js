@@ -3,7 +3,7 @@ exports.run = (client, message, args) => {
   const Discord = require("discord.js");
   const embed = new Discord.MessageEmbed();
   let member = message.mentions.users.first() || message.author;
-  embed.setColor(0x333333);
+  embed.setColor(3447003);
   embed.setTitle(member.username + " avatar");
   embed.setImage(member.avatarURL({ dynamic: true, size: 1024 }));
   embed.setTimestamp();

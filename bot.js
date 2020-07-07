@@ -14,8 +14,6 @@ const { Client, MessageEmbed, Collection, guild } = require("discord.js");
 const fs = require("fs");
 const Enmap = require("enmap");
 const config = require("./config.json");
-const moment = require("moment");
-const RegExp = require("regexp");
 const { connect } = require("mongoose");
 const client = new Client({
   disableEveryone: true,
@@ -23,7 +21,7 @@ const client = new Client({
 });
 
 client.config = require("./config.json");
-client.mongoose = require("./util/mongoose");
+client.mongoose = require("./util/db/mongoose");
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -31,7 +29,6 @@ fs.readdir("./events/", (err, files) => {
     const event = require(`./events/${file}`);
     let eventName = file.split(".")[0];
     client.on(eventName, event.bind(null, client));
-    console.log(`Listener loaded: ${file}`);
   });
 });
 
@@ -54,17 +51,6 @@ categories.forEach(category => {
     }
   }
 });
-
-const init = async () => {
-  const evtFiles = await readdir("./events/");
-  client.logger.log(`Loading a total of ${evtFiles.length} events.`);
-  evtFiles.forEach(file => {
-    const eventName = file.split(".")[0];
-    client.logger.log(`Loading Event: ${eventName}`);
-    const event = require(`./events/${file}`);
-    client.on(eventName, event.bind(null, client));
-  });
-};
 
 client.mongoose.init(connect);
 
@@ -92,4 +78,32 @@ process.on("unhandledRejection", error => {
   console.error("Unhandled promise rejection:", error);
 });
 
-client.login(process.env.TOKEN);
+client.clean = async (client, text) => {
+  if (text && text.constructor.name == "Promise") text = await text;
+  if (typeof evaled !== "string")
+    text = require("util").inspect(text, { depth: 1 });
+
+  text = text
+    .replace(/`/g, "`" + String.fromCharCode(8203))
+    .replace(/@/g, "@" + String.fromCharCode(8203))
+    .replace(
+      client.token,
+      "No u"
+    );
+
+  return text;
+};
+
+client.on("guildMemberAdd", member => {
+  const channel = member.guild.channels.cache.find(ch => ch.id === "556117929079341081");
+  if (!channel) return;
+  channel.send(`${member} has joined the server with the user id: ${member.id}.`);
+});
+
+client.on("guildMemberRemove", member => {
+  const channel = member.guild.channels.cache.find(ch => ch.id === "556117929079341081");
+  if (!channel) return;
+  channel.send(`${member} left with the user id: ${member.id}`);
+});
+
+client.login("");

@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, client, args, guild) => {
     .addField("**Guild Name:**", `${message.guild.name}`, true)
     .addField("**Guild Owner:**", `${"<@" + message.guild.ownerID + ">"}`, true)
     .addField("**Server Region:**", `${message.guild.region}`, true)
-    .addField("**Member Count:**", `${message.guild.memberCount}`, true)
+    .addField("**Total | Humans | Bots**", `${message.guild.memberCount} | ${message.guild.members.fetch(members => !members.user.bot).length} | ${message.guild.members.fetch(members => members.user.bot).length}`, true)
     .addField("**Role Count:**", `${message.guild.roles.cache.size}`, true)
     .addField("**Large Guild?**", `${message.guild.large}`, true)
     .addField(
