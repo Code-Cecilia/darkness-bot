@@ -1,6 +1,7 @@
 # darknessbot
 a random bot i wanted to write
 
+[![Build Status](https://travis-ci.com/Uplodading-Team/darkness-bot.svg?branch=master)](https://travis-ci.com/Uplodading-Team/darkness-bot)
 
 IMPORTANT NOTE!!!!!
 
